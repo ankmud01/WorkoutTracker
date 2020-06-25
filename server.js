@@ -5,11 +5,18 @@ const PORT = process.env.PORT || 8080;
 
 const app = express();
 
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static("public"));
 
+//MongoDb Connection
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/workout', {
+    useNewUrlParser: true,
+    useFindAndModify: false
+});
+
+//Defining Routes
 // app.use(require("./routes/apiRoutes"));
 app.use(require("./routes/htmlRoutes"));
 
